@@ -19,8 +19,8 @@ local same = {}
         do
            table.insert(same,love.graphics.newImage("tile"..map[i]..".png"))
            table.insert(minima,love.graphics.newImage("tile"..map[2]..".png"))
-        for i,5,1
-            do      
+        --for i,5,1
+           -- do      
              
     
         end
