@@ -13,19 +13,28 @@ local a = 0
 local f = 0 
 local e = 1
 local same = {}
+local j = 1
+
+
 
     function love.load() -- howm many plaform you want or background
      for i = 1,12,1 
         do
-           table.insert(same,love.graphics.newImage("tile"..map[i]..".png"))
-           table.insert(minima,love.graphics.newImage("tile"..map[2]..".png"))
-        --for i,5,1
-           -- do      
-             
+            same[i] = {}
+
+
+         for j = 1,5 do
+
+
+            same[i][j] = love.graphics.newImage("tile"..map[i]..".png")
+            
+            --table.insert(same,love.graphics.newImage("tile"..map[i]..".png"))
+           -- table.insert(minima,love.graphics.newImage("tile"..map[2]..".png"))
+
     
         end
     end
-       
+end      
 print(x,y)
 function love.update(dt)--
    function love.keypressed(key)
@@ -38,12 +47,15 @@ function love.update(dt)--
     end 
 end    
     function love.draw()
-        for i = 1,8,1
+        for i = 1,12,1 
         do
+             for j = 1,5
+                do
+
             x = e + i * 600 + 200 
-             love.graphics.draw(minima[i],e - 160 * i , 140) 
-             --love.graphics.draw(same[i],e - 500* i ,y)
-                 
+            -- love.graphics.draw(minima[i],e - 160 * i , 140) 
+             love.graphics.draw(same[3][2],e - 500* i ,y)
+                 end
           
             print(i)
             print(f)
