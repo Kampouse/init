@@ -4,8 +4,11 @@ local y = 2
 BLOCK = 1 PYRA = 2 PLAYER = 3  -- constant
 
 local i = 1 local a = 0 local f = 0  local e = -632 local j = 1 local h = 0 local player = 0 local x = 1 local b = 4 local x = 2 local y = 2 local f = -630
-
+local itemx = {}
+local itemy = {}
+local vrom = 0
 local ok = {} local same = {} local player = {} local rot = {}
+local id = 0
 -- array -- table --
 local map = {BLOCK,PYRA,1,1,PLAYER,4,1,1,2,2,2,2,2,2,2,2,2,2,2}
 local locationx = 0
@@ -65,14 +68,26 @@ local ok = {1,2,3,4,5}
         object.block3.image = same[1][1]
         object.block3.shape = love.physics.newRectangleShape(object.block3.image:getWidth()- 50 ,object.block3.image:getHeight() - 168 )
         object.block3.fixture = love.physics.newFixture(object.block3.body,object.block3.shape)
-    
-            object.block3["location"] = function(locationx,locationy)
+           
+                 
+               -- object.block3.list = {}
 
+                      -- object.block3.list.table.insert(a,item.id);
+                
+
+            object.block3["location"] = function(locationx,locationy,vroom)
+                id  = id + vroom
+                
                 object.block3.locationx = locationx
                 object.block3.locationy = locationy
-                object.block3.body = love.physics.newBody(world,object.block3.locationx,object.block3.locationy,"kinematic")
+                   object.block3.body = love.physics.newBody(world,object.block3.locationx,object.block3.locationy,"kinematic")
+                   itemx[id] = object.block3.locationx
+                   itemy[id] = object.block3.locationy
                 object.block3.fixture =  love.physics.newFixture(object.block3.body,object.block3.shape)
+                 
+
                 
+                       
             
 
 
@@ -123,7 +138,10 @@ function love.keypressed(key)
 end
 
 if love.keyboard.isDown("left") then
-    
+        x = x  + 20
+        print(x)
+        object.block3.location(800 + x,250,1)
+                
         --object.ball.body:applyForce(300, -300)
         object.ball.body:setLinearVelocity(-500, 768/2) -- ot change
   -- press the left arrow key to push the ball to the left
@@ -170,9 +188,11 @@ function love.draw()
                                                        
             end         
         end
-        object.block3.location(-318,250)
-        object.block3.location(400,400)
-        object.block3.location(700,500)
+        
+
+        object.block3.location(-318,250,1)
+        object.block3.location(400,400,1)
+        object.block3.location(700,500,1)
 
     for  i = 1,5,1
         do
@@ -182,16 +202,20 @@ function love.draw()
             love.graphics.draw(same[2][2],object.ball.body:getX(),250)
                 vita,vit = object.ball.body:getLinearVelocity( ) 
                locationx =  object.ball.body:getX() + 1050
-                print(locationx)
+                --print(locationx)
+               
                 if object.ball.body:isTouching(object.ground.body) then
                     --print(object.ball.body:getX())
+                    print(object.ball.body:getX())
+                    print(locationx,"locationx")
+                    print(itemx[id],itemy[id])
                     --print(locationx,locationy)
 
                 else 
                 end
                 -- touching = object.ball.body:isTouching(object.ground.body) 
                 --print(object.ball.body:getX())
-               -- print(world:getX())
+              
           -- make a cordinate system -- 
     end
     --print(locationx)
