@@ -84,7 +84,7 @@ local ok = {1,2,3,4,5}
                    itemx[id] = object.block3.locationx
                    itemy[id] = object.block3.locationy
                 object.block3.fixture =  love.physics.newFixture(object.block3.body,object.block3.shape)
-                 for i = 1,1,id do print(itemx[id],"what")
+                 for i = 1,id,1 do print(itemx[i],itemy[i],"what")
                  end
 
                 
