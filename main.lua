@@ -84,7 +84,8 @@ local ok = {1,2,3,4,5}
                    itemx[id] = object.block3.locationx
                    itemy[id] = object.block3.locationy
                 object.block3.fixture =  love.physics.newFixture(object.block3.body,object.block3.shape)
-                 
+                 for i = 1,1,id do print(itemx[id],"what")
+                 end
 
                 
                        
@@ -190,9 +191,9 @@ function love.draw()
         end
         
 
-        object.block3.location(-318,250,1)
-        object.block3.location(400,400,1)
-        object.block3.location(700,500,1)
+       -- object.block3.location(-318,250,1)
+       -- object.block3.location(400,400,1)
+       -- object.block3.location(700,500,1)
 
     for  i = 1,5,1
         do
