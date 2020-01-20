@@ -73,6 +73,12 @@ local ok = {1,2,3,4,5}
                -- object.block3.list = {}
 
                       -- object.block3.list.table.insert(a,item.id);
+
+
+                object.block3['draw'] = function(mousex,mouse)
+                                love.graphics.draw(object.block3.image,mousex,mousey)
+                                      
+                                end
                 
 
             object.block3["location"] = function(locationx,locationy,vroom)
@@ -84,7 +90,8 @@ local ok = {1,2,3,4,5}
                    itemx[id] = object.block3.locationx
                    itemy[id] = object.block3.locationy
                 object.block3.fixture =  love.physics.newFixture(object.block3.body,object.block3.shape)
-                 for i = 1,id,1 do print(itemx[i],itemy[i],"what")
+                love.graphics.draw(object.block3.image,object.block3.locationx,object.block3.locationy)
+                 for i = 1,id,1 do print(itemx[i],"what")
                  end
 
                 
@@ -119,12 +126,14 @@ good = {object.block1.body,object.ground.body}
 end
 
 
+
     
      
 function love.update(dt)--
     world:update(dt)
-
     
+ 
+
 function love.keypressed(key)
     for i = 1,2 do
       --if object.ball.body:isTouching(good[i]) -- is higher than the "good i"
@@ -159,12 +168,22 @@ if love.keyboard.isDown("left") then
   end
 end  
 
+ function love.mousepressed( mousex, mousey, button, istouch, presses )
+        if button == 1 then
+                object.block3.draw(800 + x,250)
+                object.block3.location(800 + x,250,1)
+                end
+                end
+
+
 
 function love.draw()
+       
+
   -- set the drawing color to green for the ground
-        love.graphics.setColor(0.28, 0.63, 0.05)
+       -- love.graphics.setColor(0.28, 0.63, 0.05)
   -- draw a "filled in" polygon using the ground's coordinates
-  love.graphics.polygon("fill",object.ground.body:getWorldPoints(object.ground.shape:getPoints()))
+ -- love.graphics.polygon("fill",object.ground.body:getWorldPoints(object.ground.shape:getPoints()))
 -- important 
 
 
@@ -203,6 +222,9 @@ function love.draw()
             love.graphics.draw(same[2][2],object.ball.body:getX(),250)
                 vita,vit = object.ball.body:getLinearVelocity( ) 
                locationx =  object.ball.body:getX() + 1050
+                for i = 1,id,1 do
+                love.graphics.draw(object.block3.image,object.ball.body:getX() - itemx[id] * 0.10 ,itemy[id])
+                end
                 --print(locationx)
                
                 if object.ball.body:isTouching(object.ground.body) then
@@ -214,6 +236,8 @@ function love.draw()
 
                 else 
                 end
+
+           
                 -- touching = object.ball.body:isTouching(object.ground.body) 
                 --print(object.ball.body:getX())
               
