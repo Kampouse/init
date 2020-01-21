@@ -66,7 +66,7 @@ local ok = {1,2,3,4,5}
         object.block3.image = same[1][1]
         object.block3.body = love.physics.newBody(world,150,305,"kinematic")
         object.block3.image = same[1][1]
-        object.block3.shape = love.physics.newRectangleShape(object.block3.image:getWidth()- 50 ,object.block3.image:getHeight() - 168 )
+        object.block3.shape = love.physics.newRectangleShape(object.block3.image:getWidth() * 4 - 50 ,object.block3.image:getHeight() - 168 )
         object.block3.fixture = love.physics.newFixture(object.block3.body,object.block3.shape)
            
                  
@@ -201,9 +201,8 @@ function love.draw()
                         love.graphics.draw(object.block3.image, object.ball.body:getX(),250)
                         --object.block3.location(-318,250)
                         love.graphics.draw(object.block3.image, object.ball.body:getX()-318,250)
-                      -- object.block3.location(400,400)
-                      --  object.block3.location(700,500)
-                      --   
+                        for i = 1,id,1 do love.graphics.draw(same[1][j],object.ball.body:getX() - 632 *  i, 260)
+                        end
                          -- mutiplie by size of the image and how many item you have example here j and i (and how many you want to loaad     
                                                        
             end         
