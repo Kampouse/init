@@ -6,9 +6,15 @@ local distance = 0
 local i = 1 local a = 0 local f = 0  local e = -632 local j = 1 local h = 0 local player = 0 local x = 1 local b = 4 local x = 2 local y = 2 local f = -630
 local POINTA = 0
 local ok = {} local same = {} local player = {} local rot = {}
+local listedX = {}
+local listedY = {}
+local fuuu = 2 
 -- array -- table --
 local map = {BLOCK,PYRA,1,1,PLAYER,4,1,1,2,2,2,2,2,2,2,2,2,2,2}
 local locationx = 0
+local imageX = {}
+local imageY = {}
+
 local locationy = 0
 local ok = {1,2,3,4,5}
  -- complex drawing?
@@ -43,6 +49,25 @@ local ok = {1,2,3,4,5}
   -- attach shape to body
   object.ground.fixture = love.physics.newFixture(object.ground.body,object.ground.shape)
   -- let's create a ball
+
+
+
+
+object.image = {}
+                object.image.file = rot[1]
+                object.image["location"] = function()
+                 imageX[i],imageY[i] = love.mouse.getPosition( )
+                 imageX[1] = 0
+                 imageX[2] = 400
+                 imageX[3] = 500
+                 imageX[4] = 600
+                 imageX[5] = 10
+               end
+
+object.image["mouse"] = function(mouseX)
+        imageX[fuuu + 1] = love.mouse:getX() 
+                end
+
   object.ball = {}
   -- place the body in the center of the world and make it dynamic, so
   -- it can move around
@@ -223,10 +248,14 @@ function love.draw()
         function love.mousepressed(x,mouseY, button,istouch)
             if button  == 1
              then
+                object.image.location()
+                object.image.mouse()
                 object.mouse.position()
                 distance, x1, y1, x2, y2 = love.physics.getDistance( object.mouse.fixture,object.ball.fixture )
                 print(object.ball.body:getX() + love.mouse.getX() + distance - 10,"distance")
                 love.graphics.draw(rot[4],object.ball.body:getX() + distance, object.mouse.locationY)
+                 fuuu = fuuu + 1
+                print(fuuu)
                 
                 end        
             end
@@ -234,15 +263,17 @@ function love.draw()
        
     for  i = 1,5,1
         do
+            for fuuu = 1,fuuu,1
+                do
             
-            
-            
-            -- love.graphics.draw(rot[3], object.ball.body:getX() + distance,mouseY)         
+                        object.image.location()
+                        love.graphics.draw(rot[3], imageX[fuuu] + object.ball.body:getX() + distance, object.mouse.locationY)
+                        end         
             love.graphics.draw(rot[roged + 1],object.ball.body:getX() + distance, object.mouse.locationY)
            --  love.graphics.draw(rot[1],locationObjectx + object.ball.body:getX(),locationObjecty)
                 
           --  love.graphics.draw(rot[1],mouseX,locationObjecty)
-
+                
             love.graphics.draw(rot[1],410,object.ball.body:getY())
             love.graphics.draw(rot[3],object.ball.body:getX() + 1050 ,250)
             love.graphics.draw(same[2][2],object.ball.body:getX(),250)
@@ -257,6 +288,8 @@ function love.draw()
                 end
                 if love.mouse.isDown(1) then 
                     love.graphics.draw(rot[i],object.ball.body:getX() + love.mouse.getX() + distance,object.mouse.locationY)
+                    
+                
                 end
                 -- touching = object.ball.body:isTouching(object.ground.body) 
                 --print(object.ball.body:getX())
