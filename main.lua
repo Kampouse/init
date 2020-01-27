@@ -1,6 +1,7 @@
 local x = 2
 local y = 2
 local roged = 0
+local basic = 1
 BLOCK = 1 PYRA = 2 PLAYER = 3  -- constant
 local distance = 0
 local i = 1 local a = 0 local f = 0  local e = -632 local j = 1 local h = 0 local player = 0 local x = 1 local b = 4 local x = 2 local y = 2 local f = -630
@@ -64,7 +65,7 @@ object.image = {}
 object.image["mouse"] = function(mouseX)
          distance1, x1, y1, x2, y2 = love.physics.getDistance( object.mouse.fixture,object.ball.fixture)
         imageX[fuuu + 1] =  -object.ball.body:getX() + love.mouse:getX()
-
+        imageY[fuuu + 1] = love.mouse:getY()
                 end
 
   object.ball = {}
@@ -180,7 +181,16 @@ function love.keypressed(key)
         end
                     end
                 end
+if key  == "1"then
+    object.image.file = rot[1]
+
 end
+if key == "2"then
+    object.image.file = rot[2]
+
+end
+end
+
 
 if love.keyboard.isDown("left") then
         object.ball.body:setX(object.ball.body:getX() + 20) 
@@ -248,23 +258,26 @@ function love.draw()
              then
                 --object.image.location()
                -- object.image.mouse()
-                object.mouse.position()
-                distance, x1, y1, x2, y2 = love.physics.getDistance( object.mouse.fixture,object.ball.fixture )
-                print(object.ball.body:getX() + love.mouse.getX() + distance - 10,"distance")
-                love.graphics.draw(rot[4],object.ball.body:getX() + distance, object.mouse.locationY)
+               
                  
                 print(fuuu)
                 
                 end 
-                if button == 2
+                if button == 1
                 then
                  object.image.location()
                 object.image.mouse()
                 object.mouse.position()
                  distance1, x1, y1, x2, y2 = love.physics.getDistance( object.mouse.fixture,object.ball.fixture )
                  print( distance1,"what")
+               
                 fuuu = fuuu + 1
-
+                end
+                if button == 2 then
+                    if fuuu > 1 then 
+                    fuuu = fuuu - 1
+                    print(fuuu)
+                end
             end
         end
        
@@ -274,8 +287,12 @@ function love.draw()
                 do
             
                         object.image.location()
-                        love.graphics.draw(rot[3], imageX[fuuu] + object.ball.body:getX() + distance - 35, object.mouse.locationY)
-                        end         
+
+                   
+
+                        love.graphics.draw(rot[1], imageX[fuuu] + object.ball.body:getX() + distance - 35,imageY[fuuu])
+                     
+                    end         
             love.graphics.draw(rot[roged + 1],object.ball.body:getX() + distance, object.mouse.locationY)
            --  love.graphics.draw(rot[1],locationObjectx + object.ball.body:getX(),locationObjecty)
                 
@@ -294,7 +311,7 @@ function love.draw()
                 else 
                 end
                 if love.mouse.isDown(1) then 
-                    love.graphics.draw(rot[i],object.ball.body:getX() + love.mouse.getX() + distance,object.mouse.locationY)
+                    --love.graphics.draw(rot[i],object.ball.body:getX() + love.mouse.getX() + distance,object.mouse.locationY)
                     
                 
                 end
